@@ -19,7 +19,7 @@ app.add_middleware(  # CORS 설정 예외주소
 
 @app.get("/hello")
 def hello():
-    return {"message": "안녕하세요 파이보"}
+    return {"message": "안녕하세요 파이보입니다."}
 
 @app.get("/")
 async def root():
