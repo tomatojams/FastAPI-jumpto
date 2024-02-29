@@ -1,9 +1,12 @@
+import contextlib
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # 데이터베이스 URL을 지정
 SQLALCHEMY_DATABASE_URL = "sqlite:///./myapi.db"
+# 프로젝트 루트에 저장
 '''
  SQLAlchemy 엔진 생성
 엔진은 SQLAlchemy가 데이터베이스와 상호 작용할 때 사용하는 중요한 객체로, 데이터베이스 연결을 담당
@@ -25,3 +28,16 @@ autocommit=False -> commit을 해야 변경사항 저장. 잘못저장되어도 
 
 # SQLAlchemy 모델을 정의할 때 사용되는 베이스 클래스
 Base = declarative_base()
+
+# 데이터베이스 세션을 제공하는 컨텍스트 매니저
+# 컨텍스트 매니저는 with 구문을 사용하여 데이터베이스 세션을 생성하고 반환하는데 사용
+
+#@contextlib.contextmanager
+# 라우터에서 dependency injection을 사용하기 위해 contextmanager를 사용하지 않는다.
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+# 제너레이터에서는 차례대로 결과를 반환하고자 return 대신 yield 키워드를 사용한다.
