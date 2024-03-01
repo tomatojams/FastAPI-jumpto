@@ -27,8 +27,8 @@
     <li><a use:link href="/detail/{question.id}">{question.subject}</a></li>
   {/each}
 </ul>
-<!-- SPA Router를 사용하여 페이지를 변경 -->
-<!-- a 태그에 use:link 속성을 사용하기 위해 link를 import를 했다.
+<!-- SPA Router를 사용하여 페이지를 변경
+ a 태그에 use:link 속성을 사용하기 위해 link를 import를 했다.
 use:link 속성을 사용한 경우는 항상 /# 문자가 선행되도록 경로가 만들어진다. 
 웹 페이지에서 어떤 경로가 /#으로 시작하면 브라우저는 이 경로를 하나의 페이지로 인식한다. 
 즉, 브라우저는 http://127.0.0.1:5173/#/some-path, http://127.0.0.1:5173/#/question-create 

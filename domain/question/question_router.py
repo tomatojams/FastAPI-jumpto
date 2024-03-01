@@ -17,6 +17,7 @@ router = APIRouter(
 @router.get("/list", response_model=list[question_schema.Question])
 # question_list 함수의 반환값을 question_schema.Question 모델로 변환하여 반환한다.
 #"/api/question/list"에 대한 HTTP GET 요청을 처리하기 위한 경로를 정의
+
 def question_list(db: Session = Depends(get_db)):
     # 1. SessionLocal()을 사용하여 새 데이터베이스 세션을 생성
     # db = SessionLocal()
