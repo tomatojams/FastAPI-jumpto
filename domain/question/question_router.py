@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from database import get_db
 
-from database import SessionLocal
-from models import Question
+from database import get_db
+from domain.question import question_schema, question_crud
+# from database import SessionLocal
+# from models import Question
 
 router = APIRouter(
     prefix="/api/question",
@@ -13,24 +14,27 @@ router = APIRouter(
 라우팅이란 FastAPI가 요청받은 URL을 해석하여 그에 맞는 함수를 실행하여 그 결과를 리턴하는 행위를 말한다.
 '''
 
-@router.get("/list")
+@router.get("/list", response_model=list[question_schema.Question])
+# question_list 함수의 반환값을 question_schema.Question 모델로 변환하여 반환한다.
 #"/api/question/list"에 대한 HTTP GET 요청을 처리하기 위한 경로를 정의
 def question_list(db: Session = Depends(get_db)):
+    # 1. SessionLocal()을 사용하여 새 데이터베이스 세션을 생성
     # db = SessionLocal()
-    # #SessionLocal()을 사용하여 새 데이터베이스 세션을 생성
     # _question_list = db.query(Question).order_by(Question.create_date.desc()).all()
     # #Question 모델을 쿼리하고 결과를 create_date 속성을 기준으로 내림차순으로 정렬하여 질문 목록을 가져옵니다.
     # db.close()
     # #데이터베이스 세션 반환(O), 커넥션풀 반환(O)\ , 세션종료(X)가 아니다.
     # return _question_list
 
-    # with 사용
+    # 2.with 사용으로 수정
     # with get_db() as db:
     #     _question_list = db.query(Question).order_by(Question.create_date.desc()).all()
     #     return _question_list
 
-    # Dependency Injection 사용
-    _question_list = db.query(Question).order_by(Question.create_date.desc()).all()
+    # 3. Dependency Injection 사용으로 수정
+    # _question_list = db.query(Question).order_by(Question.create_date.desc()).all()
+    # 4. 데이터 조회하는 부분을 crud로 분리 수정
+    _question_list = question_crud.get_question_list(db)
     return _question_list
 '''
 FastAPI의 Depends는 매개 변수로 전달 받은 함수를 실행시킨 결과를 리턴한다. 
