@@ -1,6 +1,7 @@
 import datetime
 
 from pydantic import BaseModel
+from domain.answer.answer_schema import Answer
 '''
 입출력 항목의 갯수와 타입을 설정
 입출력 항목의 필수값 체크
@@ -14,10 +15,6 @@ class Question(BaseModel):
     subject: str
     content: str
     create_date: datetime.datetime
+    answer_list: list[Answer] = []
     # class Config:
     #     orm_mode = True
-        # orm_mode는 Pydantic 모델이 SQLAlchemy 모델을 반환할 때 필요한 설정이다.
-        # 이 설정을 추가하면 Pydantic 모델이 SQLAlchemy 모델을 반환할 때,
-        # SQLAlchemy 모델의 컬럼을 그대로 반환하도록 설정한다.
-# subject: str | None = None # str 또는 None으로 타입을 지정 디펄트는 None
-

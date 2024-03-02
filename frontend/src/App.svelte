@@ -17,8 +17,6 @@ Router 컴포넌트를 사용하여 라우팅을 설정, SPA Router로 동적전
 전체페이지를 다시 로드안해도 주소에 따른 컴포넌트만 로드
  -->
 
-
-
 <!-- <script>
   let question_list = [];
 

@@ -39,6 +39,13 @@ const fastapi = (
 
   // fetch 함수로 서버에 요청
   fetch(_url, options).then((response) => {
+    if (response.status === 204) {
+      // 204 즉 answer을만들때 리턴하지 않는다는 명시
+      if (success_callback) {
+        success_callback();
+      }
+      return;
+    }
     response
       .json()
       .then((json) => {
