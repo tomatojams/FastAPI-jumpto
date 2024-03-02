@@ -21,9 +21,9 @@ class Answer(Base):
     content = Column(Text, nullable=False)
     create_date = Column(DateTime, nullable=False)
     question_id = Column(Integer, ForeignKey("question.id"))
-    question_relation = relationship("Question", backref="answer_list")
+    question = relationship("Question", backref="answer_list")
     # 마지막줄은 칼럼이 아니라 관계를 나타내므로 Column이 아닌 relationship을 사용
-    # 수정가능
+    # question을 바꾸면 글이 올라가지 않음 체크포인트
 
 
     # Question 관게설정하는 클래스 지정, Question 객체에서 Answer 객체에 접근할 때 사용
