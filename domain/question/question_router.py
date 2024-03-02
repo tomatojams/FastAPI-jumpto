@@ -36,6 +36,13 @@ def question_list(db: Session = Depends(get_db)):
     # 4. CRUD 사용
     _question_list = question_crud.get_question_list(db)
     return _question_list
+
+@router.get("/detail/{question_id}", response_model=question_schema.Question)
+def question_detail(question_id: int, db: Session = Depends(get_db)):
+    question = question_crud.get_question(db, question_id = question_id)
+    return question
+
+
 '''
 FastAPI의 Depends는 매개 변수로 전달 받은 함수를 실행시킨 결과를 리턴한다. 
 따라서 db: Session = Depends(get_db)의 db 객체에는 get_db 제너레이터에 의해 생성된 세션 객체가 주입된다. 

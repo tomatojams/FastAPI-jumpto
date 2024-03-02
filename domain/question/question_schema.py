@@ -14,8 +14,8 @@ class Question(BaseModel):
     subject: str
     content: str
     create_date: datetime.datetime
-    class Config:
-        orm_mode = True
+    # class Config:
+    #     orm_mode = True
         # orm_mode는 Pydantic 모델이 SQLAlchemy 모델을 반환할 때 필요한 설정이다.
         # 이 설정을 추가하면 Pydantic 모델이 SQLAlchemy 모델을 반환할 때,
         # SQLAlchemy 모델의 컬럼을 그대로 반환하도록 설정한다.

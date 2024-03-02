@@ -19,23 +19,6 @@ Router 컴포넌트를 사용하여 라우팅을 설정, SPA Router로 동적전
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- <script>
   let question_list = [];
 
