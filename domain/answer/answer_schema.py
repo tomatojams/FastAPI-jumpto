@@ -1,4 +1,4 @@
-from pydantic import BaseModel,field_validator
+from pydantic import BaseModel, field_validator
 
 class AnswerCreate(BaseModel):
     content: str
