@@ -1,6 +1,6 @@
 <script>
-  import fastapi from "../lib/api";  // fastapi 함수
-  import {link} from 'svelte-spa-router'
+  import fastapi from "../lib/api"; // fastapi 함수
+  import { link } from "svelte-spa-router";
 
   let question_list = [];
 
@@ -10,7 +10,6 @@
     });
     //  url은/ 부터 시작,패러미터없음, success_callback 응답받은 json을 리스트에 넣어라 failure_callback은 생략
   }
-
   get_question_list();
 
   //   function get_question_list() {
@@ -22,11 +21,35 @@
   //   }
 </script>
 
-<ul>
+<div class="container my-3">
+  <table class="table">
+    <thead>
+      <tr class="table-dark">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성일시</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each question_list as question, i}
+        <tr>
+          <td>{i + 1}</td>
+          <td>
+            <a use:link href="/detail/{question.id}">{question.subject}</a>
+          </td>
+          <td>{question.create_date}</td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+  <a use:link href="/question-create" class="btn btn-primary">질문 등록하기</a>
+</div>
+
+<!-- <ul>
   {#each question_list as question}
     <li><a use:link href="/detail/{question.id}">{question.subject}</a></li>
   {/each}
-</ul>
+</ul> -->
 <!-- SPA Router를 사용하여 페이지를 변경
  a 태그에 use:link 속성을 사용하기 위해 link를 import를 했다.
 use:link 속성을 사용한 경우는 항상 /# 문자가 선행되도록 경로가 만들어진다. 

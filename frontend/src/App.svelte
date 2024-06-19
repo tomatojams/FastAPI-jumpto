@@ -3,10 +3,12 @@
   import Router from 'svelte-spa-router'
   import Home from "./routes/Home.svelte"
   import Detail from "./routes/Detail.svelte"
+  import QestionCreate from "./routes/QuestionCreate.svelte"
 
   const routes = {
     '/': Home, //Home.svelte 파일의 내용 컴포넌트, 라우팅 경로와 해당경로에 매핑되는 Svelte 컴포넌트를 정의
-    '/detail/:question_id': Detail, 
+    '/detail/:question_id': Detail,
+    '/question-create': QestionCreate,
     //  Detail 컴포넌트에 전달, 뒤의 숫자는 Detail 컴포넌트에 question_id로 전달이 된다.
   }
 </script>

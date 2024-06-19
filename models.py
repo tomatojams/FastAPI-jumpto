@@ -22,8 +22,11 @@ class Answer(Base):
     create_date = Column(DateTime, nullable=False)
     question_id = Column(Integer, ForeignKey("question.id"))
     question = relationship("Question", backref="answer_list")
+    # answer.question.subject 가능하게 하기위함이므로 question이라는 테이블명을 적음
+    # answer.question.subject 처럼 마치 객체의 속성처럼 접근가능.
+
     # 마지막줄은 칼럼이 아니라 관계를 나타내므로 Column이 아닌 relationship을 사용
-    # question을 바꾸면 글이 올라가지 않음 체크포인트
+    # question을 바꾸면 글이 올라가지 않음 체크포인트 -- 아마도 테이블네임
 
 
     # Question 관게설정하는 클래스 지정, Question 객체에서 Answer 객체에 접근할 때 사용

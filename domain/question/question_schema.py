@@ -1,6 +1,6 @@
 import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from domain.answer.answer_schema import Answer
 '''
 입출력 항목의 갯수와 타입을 설정
@@ -18,3 +18,13 @@ class Question(BaseModel):
     answer_list: list[Answer] = []
     # class Config:
     #     orm_mode = True
+
+class QuestionCreate(BaseModel):
+    subject: str
+    content: str
+
+    @field_validator('subject', 'content')
+    def not_empty(cls, v): # cls는 클래스 자신을 의미 v는 검증할 값
+        if not v or not v.strip():
+            raise ValueError('빈 값은 허용되지 않습니다.')
+        return v
